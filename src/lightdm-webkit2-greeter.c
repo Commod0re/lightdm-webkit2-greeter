@@ -108,7 +108,7 @@ main(int argc, char **argv) {
     gchar *theme;
     GdkRGBA bg_color;
 
-    WebKitWebContext *context = webkit_web_context_get_default();
+    WebKitWebContext *context = NULL;
     g_signal_connect(context,
                      "initialize-web-extensions",
                      G_CALLBACK(initialize_web_extensions_cb),
@@ -138,6 +138,7 @@ main(int argc, char **argv) {
     gtk_window_set_default_size(GTK_WINDOW(window), geometry.width, geometry.height);
     gtk_window_move(GTK_WINDOW(window), geometry.x, geometry.y);
 
+    context = webkit_web_context_get_default();
     create_new_webkit_settings_object();
     web_view = webkit_web_view_new_with_settings(webkit_settings);
 
