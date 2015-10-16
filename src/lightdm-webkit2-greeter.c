@@ -69,8 +69,9 @@ wm_window_filter(GdkXEvent *gxevent, GdkEvent *event, gpointer data) {
         int revert_to = RevertToNone;
 
         XGetInputFocus(xevent->xunmap.display, &xwin, &revert_to);
-        if (revert_to == RevertToNone)
-            gdk_window_lower(gtk_widget_get_window(gtk_widget_get_toplevel(GTK_WIDGET(window))));
+        if (revert_to == RevertToNone) {
+            gdk_window_lower(gdk_screen_get_root_window(gtk_window_get_screen(GTK_WINDOW(window))));
+        }
     }
 
     return GDK_FILTER_CONTINUE;
